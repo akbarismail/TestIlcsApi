@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TestIlcsApi.Repositories;
+using TestIlcsApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,18 @@ builder.Services.AddSwaggerGen();
 // connection DB
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// repository
+builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+// persistence
+builder.Services.AddTransient<IPersistence, DbPersistence>();
+
+// services
+builder.Services.AddTransient<ICountryService, CountryService>();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IHarbourService, HarbourService>();
+builder.Services.AddTransient<IPpnService, PpnService>();
 
 var app = builder.Build();
 

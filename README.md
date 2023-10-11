@@ -9,6 +9,9 @@ To clone this project you can do :
    ```
 4. don't forget create connection in `appsettings.json` and `appsettings.Development.json`
    ```bash
-   
+   "ConnectionStrings": {
+    "DefaultConnection": "Server=,;User=;Password=;Database=;TrustServerCertificate=True"
+   }
    ```
-5. happy coding
+5. application run `https://localhost:7216;http://localhost:5021`
+6. happy coding
